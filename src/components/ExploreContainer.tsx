@@ -2,13 +2,14 @@ import './ExploreContainer.css';
 
 interface ContainerProps {
   name: string;
+  url: string;
 }
 
-const ExploreContainer: React.FC<ContainerProps> = ({ name }) => {
+const ExploreContainer: React.FC<ContainerProps> = ({ name, url }) => {
   return (
     <div className="container">
       <strong>{name}</strong>
-      <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      <p> <a target="_blank" rel="noopener noreferrer" href={url}> Try the Question </a></p>
     </div>
   );
 };

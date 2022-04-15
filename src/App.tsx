@@ -7,10 +7,11 @@ import {
   IonTabBar,
   IonTabButton,
   IonTabs,
-  setupIonicReact
+  setupIonicReact,
 } from '@ionic/react';
+import React, { useState, useContext } from "react"
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { shuffle, star, list } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
@@ -33,11 +34,17 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-
+import jsonData from "./data.json";
 setupIonicReact();
 
+export const QuestionsContext = React.createContext(jsonData); //Initialise
+
+
 const App: React.FC = () => (
+  
   <IonApp>
+    {/* <QuestionsContext.Provider value={jsonData}> */}
+
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
@@ -47,7 +54,7 @@ const App: React.FC = () => (
           <Route exact path="/tab2">
             <Tab2 />
           </Route>
-          <Route path="/tab3">
+          <Route exact path="/tab3">
             <Tab3 />
           </Route>
           <Route exact path="/">
@@ -56,20 +63,22 @@ const App: React.FC = () => (
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon icon={triangle} />
-            <IonLabel>Tab 1</IonLabel>
+            <IonIcon icon={shuffle} />
+            <IonLabel>Shuffle</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
+            <IonIcon icon={star} />
+            <IonLabel>Favorites</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon icon={square} />
-            <IonLabel>Tab 3</IonLabel>
+            <IonIcon icon={list} />
+            <IonLabel>All Questions</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
     </IonReactRouter>
+    {/* </QuestionsContext.Provider> */}
+
   </IonApp>
 );
 
